@@ -1,0 +1,23 @@
+_min_copier_version: "9.19.1"
+_answers_file: .copier-answers.ext-hub.yml
+_templates_suffix: .slotjinja
+_external_data:
+  project: .copier-answers.yml
+  panel_api: framework/panel/extension-api.json
+hub_url:
+  type: str
+  # A project behind a hub has web_domain <project>.<hub domain>; the hub's page is portal.<hub domain>.
+  default: >-
+    {%- set domain = _external_data.project.web_domain | default('') -%}
+    {%- if '.' in domain -%}https://portal.{{ domain.split('.', 1)[1] }}{%- endif -%}
+  help: Address of the hub's entry page (its environments.json lists the instances)
+  validator: >-
+    {% if _external_data.panel_api.version is defined and _external_data.panel_api.version < 3 %}
+    This framework's panel has no instance switcher (panel API 3): update the framework first.
+    {% elif not (hub_url | regex_search('^https?://[A-Za-z0-9.-]+(:[0-9]+)?$')) %}
+    Use the hub's origin, for example https://portal.example.com (no path, no trailing slash).
+    {% endif %}
+_exclude:
+  - copier.yml
+  - README.md
+  - .git

@@ -1,0 +1,2 @@
+# Instance switcher (panel API 3, D94): the hub lists the panels this person may open.
+url: {{ (hub_url ~ '/environments.json') | tojson }}

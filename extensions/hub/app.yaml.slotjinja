@@ -1,0 +1,5 @@
+id: hub
+name: {es: Hub, en: Hub}
+description: {es: Todas las instancias de este servidor, en: Every instance on this host}
+icon: apps
+url: {{ (hub_url ~ '/') | tojson }}
