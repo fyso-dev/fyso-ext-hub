@@ -19,5 +19,7 @@ hub_url:
     {% endif %}
 _exclude:
   - copier.yml
+  - LICENSE
   - README.md
   - .git
+  - .gitignore
